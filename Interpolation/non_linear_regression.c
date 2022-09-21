@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <math.h>
-
+// x = 1 2 3 4 5
+// y = 0.5 2 4.5 8 12.5
 int main()
 {
     float x[10], y[10];
     int n, i;
     float sumX=0, sumY=0, sumXY=0, sumX2=0;
-    float a,b;
+    float a,b,real_a;
 
     printf("Enter number of elements: ");
     scanf("%d",&n);
@@ -27,14 +28,16 @@ int main()
 
     for(i=0; i<n; i++)
     {
-        sumX += x[i];
-        sumY += y[i];
-        sumXY += x[i]*y[i];
-        sumX2 += pow(x[i],2);
+        sumX += log10(x[i]);
+        sumY += log10(y[i]);
+        sumXY += log10(x[i])*log10(y[i]) ;
+        sumX2 += pow(log10(x[i]),2);
     }
 
     b = (n*sumXY-sumX*sumY)/(n*sumX2-pow(sumX,2));
     a = (sumY/n)- (b*(sumX/n));
-    printf("\nThe required equation is : y = %.3f + %.3fx\n",a,b);
+    real_a = pow(10,a);
+
+    printf("\nThe required equation is : y = %.3fx^%.3fx\n",real_a,b);
     return 0;
 }
